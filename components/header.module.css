@@ -1,0 +1,9 @@
+.title{
+    font: 2rem solid !important;
+    margin: 0 90px 0 0 !important;
+}
+
+.logout{
+    right: 0;
+    position: absolute;
+}

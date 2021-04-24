@@ -6,9 +6,11 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import styles from './header.module.css'
+import styles from './body.module.css'
 import UserList from '../pages/users/list';
+import UserAdd from '../pages/users/add';
 import Dashboard from '../pages/dashboard';
+import { Website_Name } from '../globals';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -51,13 +53,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ScrollableTabsButtonAuto({title}) {
+export default function Body() {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const [value, setValue] = React.useState(0);
+  const [usersList, setUsersList] = React.useState(true);
+
+  const handleChange = (event, newValue) => setValue(newValue);
+
+  const AddNewUsers = () => setUsersList(false);
+  const ListUsers = () => setUsersList(true);
 
   return (
     <div className={classes.root}>
@@ -71,8 +76,8 @@ export default function ScrollableTabsButtonAuto({title}) {
           scrollButtons="auto"
           aria-label="scrollable auto tabs example"
         >
-          <Tab label={title} className={styles.title} {...a11yProps(0)} />
-          <Tab label="Users" {...a11yProps(1)} />
+          <Tab label={Website_Name} className={styles.title} {...a11yProps(0)} />
+          <Tab label="Users" {...a11yProps(1)} onClick={!usersList ? ListUsers: null}/>
           <Tab label="Item Three" {...a11yProps(2)} />
           <Tab label="Item Four" {...a11yProps(3)} />
           <Tab label="Item Five" {...a11yProps(4)} />
@@ -81,7 +86,7 @@ export default function ScrollableTabsButtonAuto({title}) {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}><Dashboard /></TabPanel>
-      <TabPanel value={value} index={1}><UserList /></TabPanel>
+      <TabPanel value={value} index={1}>{usersList ? <UserList addNew={AddNewUsers} /> : <UserAdd goToList={ListUsers} />}</TabPanel>
       <TabPanel value={value} index={2}>
         Item Three
       </TabPanel>

@@ -5,5 +5,5 @@
 
 .logout{
     right: 0;
-    position: absolute;
+    position: absolute !important;
 }

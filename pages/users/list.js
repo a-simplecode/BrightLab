@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import DataGrid from '../../components/dataGrid';
+import Button from '../../components/button';
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -34,15 +35,15 @@ const columns = [
     { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
   ]
 
-export default function UserList() {
-  return (<div>
+export default function UserList({addNew}) {
+  return (<>
       <Head>
         <title>Users</title>
       </Head>
       <h3>
-        Users List 
+        Users List <Button color="primary" name="Add New" onClick={addNew}/>
       </h3>
     <DataGrid data={data} columns={columns} pageSize={5}/>
-    </div>
+    </>
   )
 }

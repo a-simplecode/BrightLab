@@ -10,6 +10,7 @@ import UserList from '../pages/users/list';
 import UserAdd from '../pages/users/add';
 import Dashboard from '../pages/dashboard';
 import { Website_Name } from '../globals';
+import SalesList from '../pages/sales/list';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -78,29 +79,11 @@ export default function Body() {
           <Tab label={Website_Name} className={styles.title} {...a11yProps(0)} />
           <Tab label="Users" {...a11yProps(1)} onClick={!usersList ? ListUsers: null}/>
           <Tab label="Item Three" {...a11yProps(2)} />
-          <Tab label="Item Four" {...a11yProps(3)} />
-          <Tab label="Item Five" {...a11yProps(4)} />
-          <Tab label="Item Six" {...a11yProps(5)} />
-          <Tab label="Logout" {...a11yProps(6)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}><Dashboard /></TabPanel>
       <TabPanel value={value} index={1}>{usersList ? <UserList addNew={AddNewUsers} /> : <UserAdd goToList={ListUsers} />}</TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        Item Four
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        Item Five
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-        Item Six
-      </TabPanel>
-      <TabPanel value={value} index={6}>
-        Item Seven
-      </TabPanel>
+      <TabPanel value={value} index={2}><SalesList /></TabPanel>
     </div>
   );
 }

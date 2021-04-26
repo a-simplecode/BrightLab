@@ -3,19 +3,7 @@
     padding: 20px 40px;
     border-radius: 11px;
     box-shadow: 0 5px 25px 0 rgb(0 0 0 / 20%);
-    min-height: 80vh;
-}
-
-@media (max-width: 575px) {
-    .root{
-          margin: 10px 0;
-    }
-}
-
-@media (min-width: 576px) and (max-width: 1199px) {
-    .root{
-          margin: 10px 5%;
-    }
+    min-height: 70vh;
 }
 
 .row{
@@ -30,4 +18,36 @@
 .right{
     width: 50%;
     padding: 10px;
+}
+
+@media (max-width: 575px) {
+    .root{
+          margin: 10px 0;
+    }
+    .row{
+        display: inline;
+    }
+    .left{
+        width: 100%;
+    }
+    
+    .right{
+        width: 100%;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 1199px) {
+    .root{
+          margin: 10px 5%;
+    }
+    .row{
+        display: inline;
+    }
+    .left{
+        width: 100%;
+    }
+    
+    .right{
+        width: 100%;
+    }
 }

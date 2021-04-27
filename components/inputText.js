@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 
-export default function InputText({ id, label, value, type, handleChange, fullWidth, required }) {
+export default function InputText({ id, label, value, type, handleChange, fullWidth, required,error }) {
     const [val, setVal] = React.useState(value);
-    useEffect(()=>{
+    useEffect(() => {
         setVal(value);
-    },[value]);
+    }, [value]);
 
     return (
         <TextField
@@ -16,9 +16,10 @@ export default function InputText({ id, label, value, type, handleChange, fullWi
             onChange={(e) => {
                 setVal(e.target.value)
             }}
-            onBlur={()=>handleChange(id, val)}
+            onBlur={() => handleChange(id, val)}
             fullWidth={fullWidth ? fullWidth : undefined}
             required={required ? required : undefined}
+            error={error ? error : undefined}
             variant="outlined"
         />
     );

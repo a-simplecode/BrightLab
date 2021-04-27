@@ -78,7 +78,7 @@ export default function Body() {
         >
           <Tab label={Website_Name} className={styles.title} {...a11yProps(0)} />
           <Tab label="Users" {...a11yProps(1)} onClick={!usersList ? ListUsers: null}/>
-          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="Sales" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}><Dashboard /></TabPanel>

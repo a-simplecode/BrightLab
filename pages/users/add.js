@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '../../components/button';
 import Container, { RenderRows } from '../../components/container';
 import InputText from '../../components/inputText';
+import { toast } from 'react-toastify';
 
 const useStyles = makeStyles((theme) => ({
   buttonLeft: {
@@ -22,6 +23,7 @@ export default function UserAdd({ goToList }) {
   const classes = useStyles();
 
   const [userObj, setUserObj] = React.useState({ firstName: "", lastName: "", phoneNumber: "", email: "", age: "" });
+  const [userObjErr, setUserObjErr] = React.useState({});
 
   useEffect(() => {
     //fetch data from api
@@ -29,11 +31,34 @@ export default function UserAdd({ goToList }) {
     setUserObj(obj);
   }, [])
 
-  const handleChange = (id, value) => setUserObj({ ...userObj, [id]: value });
-  const clear = () => setUserObj({ firstName: "", lastName: "", phoneNumber: "", email: "", age: "" });
+  const handleChange = (id, value) => {
+    setUserObj({ ...userObj, [id]: value });
+    if(value) setUserObjErr({ ...userObjErr, [id]: undefined})
+  }
+
+  const clear = () => {
+    setUserObj({ firstName: "", lastName: "", phoneNumber: "", email: "", age: "" });
+    setUserObjErr({});
+  }
+
   const save = () => {
-    const dataObjToSave = userObj;
-    //save data 
+    let tempError ={};
+
+    if(userObj.firstName === "") tempError.firstName = true
+    if(userObj.lastName === "") tempError.lastName = true
+    if(userObj.phoneNumber === "") tempError.phoneNumber = true
+    if(userObj.email === "") tempError.email = true
+    
+    if(Object.keys(tempError).length > 0){
+      setUserObjErr(tempError);
+      toast.error("Some Required Fields Cannot be left Empty");
+    }else{
+      const dataObjToSave = userObj;
+      //save data 
+      toast.success("Save Successfully");
+      goToList();
+    }
+
   };
 
   return (<>
@@ -51,6 +76,7 @@ export default function UserAdd({ goToList }) {
           value={userObj.firstName}
           fullWidth
           required
+          error={userObjErr.firstName}
           handleChange={handleChange} />}
 
         right={<InputText
@@ -59,6 +85,7 @@ export default function UserAdd({ goToList }) {
           value={userObj.lastName}
           fullWidth
           required
+          error={userObjErr.lastName}
           handleChange={handleChange} />}
       />
 
@@ -69,6 +96,7 @@ export default function UserAdd({ goToList }) {
           value={userObj.phoneNumber}
           fullWidth
           required
+          error={userObjErr.phoneNumber}
           handleChange={handleChange} />}
 
         right={<InputText
@@ -77,6 +105,7 @@ export default function UserAdd({ goToList }) {
           value={userObj.email}
           fullWidth
           required
+          error={userObjErr.email}
           handleChange={handleChange} />}
       />
       <RenderRows
